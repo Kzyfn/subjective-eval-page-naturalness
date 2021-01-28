@@ -1,0 +1,12 @@
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+static/wav/
+static/results/
+*.DS_Store
+__pycache__/
+.ipynb_checkpoints/
+*.ipynb
