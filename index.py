@@ -55,16 +55,20 @@ def index():
 @app.route('/done', methods=['GET', 'POST'])
 def done():
     if request.method == 'POST':
-        # リクエストフォームから「名前」を取得して
-        result_path = randomname(20)
-        result_dict = {model:{} for model in models}
+        result_path = randomname(20)#結果ファイルの識別子
+        result_dict = {model:{} for model in models}#結果格納用辞書
+
+        """
+        request.form: {'/static/wav/{model}/{bcp}.wav': {値},... }みたいなものが入ってる 
+        ex. {'/static/wav/model1/OSAKA1200_0001.wav': 0, '/static/wav/model2/OSAKA1200_0001.wav': 4, ...}
+        """
 
         for key in request.form.keys():
             for model in models:
                 if model in key:
                    result_dict[model][key[key.rfind('/')+1:]] =  request.form[key]
 
-        pd.DataFrame(result_dict).to_csv('static/results/{}.pickle'.format(result_path))
+        pd.DataFrame(result_dict).to_csv('static/results/{}.csv'.format(result_path))
 
         return render_template('done.html', result_path = result_path)
     else:
@@ -73,4 +77,4 @@ def done():
 
 if __name__ == '__main__':
     app.debug = True # デバッグモード有効化
-    app.run(host='0.0.0.0') # どこからでもアクセス可能に
+    app.run(host='0.0.0.0', port=80) # どこからでもアクセス可能に
