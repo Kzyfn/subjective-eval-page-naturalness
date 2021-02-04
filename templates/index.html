@@ -7,7 +7,8 @@
     <div class="row">
       <div class="col-md-12">
         <p class="lead">
-          下の大阪弁の音声を聞いて，イントネーション自然性 (どれだけ大阪弁らしく聞こえるか) を<br> 1〜5の5段階(1:不自然，5:自然)で評価してください．
+          下の大阪弁の音声を聞いて，標本音声に近いアクセントを持つ方を選んでください．<br>
+          全く同じに聞こえる場合でも，どちらか一方を選んでください．
         </p>
 
         <div class="row" style='display: flex; align-items: center; justify-content: center;'>    
@@ -15,31 +16,43 @@
           <form action="/done" method="post" class="form-inline" id="naturalness">
             
             {% for wav_file in wav_files %}
-            <div class="row" style='flex-direction: column; align-items: center; display: flex;'>
+            <div class="column" style='flex-direction: column; align-items: center; display: flex; margin-top:60px;'>
+              標本音声
               <audio
-                style='margin: 5pt; margin-top: 30pt;'
+                style='margin: 5pt; margin-top: 10pt;'
                 controls
-                src={{ wav_file }}>
+                src={{ '/static/wav/natural/' + wav_file }}>
                     Your browser does not support the
                   <code>audio</code> element.
               </audio>
             <!-- ループの中身 -->
-              <div class="row" style='flex-direction: row; display: flex;'>   
-                <label style='margin: 10pt'>1 
-                  <input type="radio" name={{wav_file}} value=1 required>
-                </label>
-                <label style='margin: 10pt'>2 
-                  <input type="radio" name={{wav_file}} value=2 required>
-                </label>
-                <label style='margin: 10pt'>3 
-                  <input type="radio" name={{wav_file}} value=3 required>
-                </label>
-                <label style='margin: 10pt'>4 
-                  <input type="radio" name={{wav_file}} value=4 required>
-                </label> 
-                <label style='margin: 10pt'>5 
-                  <input type="radio" name={{wav_file}} value=5 required>
-                </label>
+              <div class="row" style='flex-direction: row; display: flex; align-items: center;'>   
+                  <div class="column" style='flex-direction: column; align-items: center; display: flex;'>
+                    音声 A
+                    <audio
+                      style='margin: 5pt; margin-top: 10pt;'
+                      controls
+                      src={{ model_a + wav_file }}>
+                          Your browser does not support the
+                        <code>audio</code> element.
+                    </audio>
+                    <label style='margin: 10pt'>A
+                      <input type="radio" name={{wav_file}} value=1 required>
+                    </label>
+                  </div>
+                  <div class="column" style='flex-direction: column; align-items: center; display: flex;'>
+                    音声 B
+                    <audio
+                      style='margin: 5pt; margin-top: 10pt;'
+                      controls
+                      src={{ model_b + wav_file }}>
+                          Your browser does not support the
+                        <code>audio</code> element.
+                    </audio>
+                    <label style='margin: 10pt'>B
+                      <input type="radio" name={{wav_file}} value=2 required>
+                    </label>
+                  </div>
               </div>
             {% endfor %}
             </div>

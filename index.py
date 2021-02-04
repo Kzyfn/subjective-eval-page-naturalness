@@ -41,15 +41,13 @@ def index():
     for idx in chosen_indices:
         chosen_bcps.append(bcps[idx])
 
-    files = []
-    for model in models:
-        for chosen_bcp in chosen_bcps:
-            files.append(join('/static/wav', model, chosen_bcp))
 
-    random.shuffle(files)
+    random.shuffle(chosen_bcps)
+    model_a = '/static/wav/decision_tree_nc2/'
+    model_b = '/static/wav/decision_tree_wo_accent/'
     # index.html をレンダリングする
 
-    return render_template('index.html', wav_files=files)
+    return render_template('index.html', wav_files=chosen_bcps, model_a=model_a, model_b=model_b, )
 
 
 @app.route('/done', methods=['GET', 'POST'])
@@ -77,4 +75,4 @@ def done():
 
 if __name__ == '__main__':
     app.debug = True # デバッグモード有効化
-    app.run(host='0.0.0.0', port=80) # どこからでもアクセス可能に
+    app.run(host='0.0.0.0', port=5000) # どこからでもアクセス可能に
