@@ -57,8 +57,8 @@ def index():
             style_a = "flex-direction:column;align-items:center;order:1;"
             style_b = "flex-direction:column;align-items:center;order:0;"
 
-            model_b_order.append(2)
-            model_a_order.append(1)
+            model_a_order.append(2)
+            model_b_order.append(1)
             model_a_style.append(style_a)
             model_b_style.append(style_b)
 
