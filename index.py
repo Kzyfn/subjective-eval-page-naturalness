@@ -36,10 +36,7 @@ def index():
     ここでランダムにbcpを20個選んできて20個とも同じ画面に表示
     """
 
-    chosen_indices = np.random.randint(0, 67, 5)
-    chosen_bcps = []
-    for idx in chosen_indices:
-        chosen_bcps.append(bcps[idx])
+    chosen_bcps = np.random.choice(bcps, 5, replace=False)
 
     files = []
     for model in models:
