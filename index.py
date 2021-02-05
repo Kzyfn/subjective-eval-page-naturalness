@@ -36,11 +36,8 @@ def index():
     """
     ここでランダムにbcpを20個選んできて20個とも同じ画面に表示
     """
-    n = 5
-    chosen_indices = np.random.randint(0, 67, n)
-    chosen_bcps = []
-    for idx in chosen_indices:
-        chosen_bcps.append(bcps[idx])
+    n = 30
+    chosen_bcps = np.random.choice(bcps, n, replace = False)
     
     model_a_order = []
     model_b_order = []
