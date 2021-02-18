@@ -21,15 +21,18 @@ def int2str(num):
 
 # 自身の名称を app という名前でインスタンス化する
 app = Flask(__name__)
-models = ['decision_tree_nc2', 'decision_tree_wo_accent', 'with_accent_z', 'wo_accent_z']
-bcps = ['OSAKA864_{}.wav'.format(int2str(i*13+2)) for i in range(67)]
+#models = ['decision_tree_nc2', 'decision_tree_wo_accent', 'with_accent_z', 'wo_accent_z']
+#bcps = ['OSAKA864_{}.wav'.format(int2str(i*13+2)) for i in range(67)]
+
+
+bcps = ['OSAKA1300_{}.wav'.format(int2str(i*13+2)) for i in range(100)]
 
 
 # ここからウェブアプリケーション用のルーティングを記述
 # index にアクセスしたときの処理
 
-model_a = '/static/wav/decision_tree_nc2/'
-model_b = '/static/wav/decision_tree_wo_accent/'
+model_a = "/static/wav/nc2/"#'/static/wav/decision_tree_nc2/'
+model_b = "/static/wav/nc4/"#'/static/wav/decision_tree_wo_accent/'
 
 @app.route('/', methods=['GET'])
 def index():
@@ -57,8 +60,8 @@ def index():
             style_a = "flex-direction:column;align-items:center;order:1;"
             style_b = "flex-direction:column;align-items:center;order:0;"
 
-            model_b_order.append(2)
-            model_a_order.append(1)
+            model_a_order.append(2)
+            model_b_order.append(1)
             model_a_style.append(style_a)
             model_b_style.append(style_b)
 

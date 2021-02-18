@@ -10,3 +10,4 @@ static/results/
 __pycache__/
 .ipynb_checkpoints/
 *.ipynb
+static/

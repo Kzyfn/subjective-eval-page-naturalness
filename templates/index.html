@@ -15,7 +15,7 @@
 
           <form action="/done" method="post" class="form-inline" id="naturalness">
             
-            {% for wav_file in wav_files %}
+            {% for wav_file, order_a, order_b, style_a, style_b in wav_files_and_orders %}
             <div class="column" style='flex-direction: column; align-items: center; display: flex; margin-top:60px;'>
               標本音声
               <audio
@@ -26,9 +26,9 @@
                   <code>audio</code> element.
               </audio>
             <!-- ループの中身 -->
-              <div class="row" style='flex-direction: row; display: flex; align-items: center;'>   
-                  <div class="column" style='flex-direction: column; align-items: center; display: flex;'>
-                    音声 A
+              <div class="row" style='display:flexbox; align-items: center;'> 
+                  <div class="column" style={{style_a}}>
+                    音声 {{order_a}}
                     <audio
                       style='margin: 5pt; margin-top: 10pt;'
                       controls
@@ -36,12 +36,12 @@
                           Your browser does not support the
                         <code>audio</code> element.
                     </audio>
-                    <label style='margin: 10pt'>A
-                      <input type="radio" name={{wav_file}} value=1 required>
+                    <label style='margin: 10pt'>{{order_a}}
+                      <input type="radio" name={{wav_file}} value=0 required>
                     </label>
                   </div>
-                  <div class="column" style='flex-direction: column; align-items: center; display: flex;'>
-                    音声 B
+                  <div class="column" style={{style_b}}>
+                    音声 {{order_b}}
                     <audio
                       style='margin: 5pt; margin-top: 10pt;'
                       controls
@@ -49,8 +49,8 @@
                           Your browser does not support the
                         <code>audio</code> element.
                     </audio>
-                    <label style='margin: 10pt'>B
-                      <input type="radio" name={{wav_file}} value=2 required>
+                    <label style='margin: 10pt'>{{order_b}}
+                      <input type="radio" name={{wav_file}} value=1 required>
                     </label>
                   </div>
               </div>
