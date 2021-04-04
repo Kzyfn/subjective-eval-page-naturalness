@@ -15,6 +15,14 @@ def randomname(n):
    randlst = [random.choice(string.ascii_letters + string.digits) for i in range(n)]
    return ''.join(randlst)
 
+def read_text(filepath):
+    print(filepath)
+    #try:
+    with open(filepath, 'r') as f:
+        s = f.readline()
+    return s
+    #except:
+    #    return None
 
 def int2str(num):
     return '0'*(4-len(str(num))) + str(num)
@@ -25,22 +33,25 @@ app = Flask(__name__)
 #bcps = ['OSAKA864_{}.wav'.format(int2str(i*13+2)) for i in range(67)]
 
 
-bcps = ['OSAKA1300_{}.wav'.format(int2str(i*13+2)) for i in range(100)]
+bcps = ['OSAKA3696_{}.wav'.format(int2str(i*13+2)) for i in range(285)]
 
 
 # ここからウェブアプリケーション用のルーティングを記述
 # index にアクセスしたときの処理
 
-model_a = "/static/wav/nc2/"#'/static/wav/decision_tree_nc2/'
-model_b = "/static/wav/nc4/"#'/static/wav/decision_tree_wo_accent/'
+model_a = "/static/wav/accent_rnn/generated/"#'/static/wav/decision_tree_nc2/'
+model_b = "/static/wav/accent_rnn_wo_accent/generated/"#'/static/wav/decision_tree_wo_accent/'
 
 @app.route('/', methods=['GET'])
 def index():
     """
     ここでランダムにbcpを20個選んできて20個とも同じ画面に表示
     """
-    n = 30
+    n = 20
     chosen_bcps = np.random.choice(bcps, n, replace = False)
+
+    texts = [read_text(join('./static/text', x.replace('.wav', '.txt').replace('OSAKA3696', 'OSAKA_PHRASES3696'))) for x in chosen_bcps]
+
     
     model_a_order = []
     model_b_order = []
@@ -66,11 +77,16 @@ def index():
             model_b_style.append(style_b)
 
 
+    seed = np.random.randint(100)
+    random.seed(seed)
     random.shuffle(chosen_bcps)
+    random.seed(seed)
+    random.shuffle(texts)
+
     # index.html をレンダリングする
 
 
-    return render_template('index.html', model_a=model_a, model_b=model_b, wav_files_and_orders=zip(chosen_bcps, model_a_order, model_b_order, model_a_style, model_b_style) )
+    return render_template('index.html', model_a=model_a, model_b=model_b, wav_files_and_orders=zip(chosen_bcps, model_a_order, model_b_order, model_a_style, model_b_style, texts) )
 
 
 @app.route('/done', methods=['GET', 'POST'])

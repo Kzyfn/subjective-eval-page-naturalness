@@ -15,13 +15,15 @@
 
           <form action="/done" method="post" class="form-inline" id="naturalness">
             
-            {% for wav_file, order_a, order_b, style_a, style_b in wav_files_and_orders %}
+            {% for wav_file, order_a, order_b, style_a, style_b, text in wav_files_and_orders %}
             <div class="column" style='flex-direction: column; align-items: center; display: flex; margin-top:60px;'>
+              発話テキスト<br/>
+              「 {{ text }} 」<br/>
               標本音声
               <audio
                 style='margin: 5pt; margin-top: 10pt;'
                 controls
-                src={{ '/static/wav/natural/' + wav_file }}>
+                src={{ '/static/wav/natural/generated/' + wav_file }}>
                     Your browser does not support the
                   <code>audio</code> element.
               </audio>
