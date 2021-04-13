@@ -34,13 +34,15 @@ app = Flask(__name__)
 
 
 bcps = ['OSAKA3696_{}.wav'.format(int2str(i*13+2)) for i in range(285)]
-
+bcps.remove('OSAKA3696_1353.wav')
+bcps.remove('OSAKA3696_0651.wav')
+bcps.remove('OSAKA3696_0829.wav')
 
 # ここからウェブアプリケーション用のルーティングを記述
 # index にアクセスしたときの処理
 
-model_a = "/static/wav/accent_rnn/generated/"#'/static/wav/decision_tree_nc2/'
-model_b = "/static/wav/accent_rnn_wo_accent/generated/"#'/static/wav/decision_tree_wo_accent/'
+model_a = "https://ssw-yufune.s3.us-east-2.amazonaws.com/predected-duration-train3696/decision_tree_ar/"#/static/wav/accent_rnn/generated/"#'/static/wav/decision_tree_nc2/'
+model_b = "https://ssw-yufune.s3.us-east-2.amazonaws.com/predected-duration-train3696/baseline_rnn/"#"/static/wav/accent_rnn_wo_accent/generated/"#'/static/wav/decision_tree_wo_accent/'
 
 @app.route('/', methods=['GET'])
 def index():
