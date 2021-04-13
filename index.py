@@ -34,9 +34,9 @@ app = Flask(__name__)
 
 
 bcps = ['OSAKA3696_{}.wav'.format(int2str(i*13+2)) for i in range(285)]
-bcps.remove('OSAKA3696_1353.wav')
-bcps.remove('OSAKA3696_0651.wav')
-bcps.remove('OSAKA3696_0829.wav')
+bcps.remove('OSAKA3696_1354.wav')
+bcps.remove('OSAKA3696_0652.wav')
+bcps.remove('OSAKA3696_0821.wav')
 
 # ここからウェブアプリケーション用のルーティングを記述
 # index にアクセスしたときの処理
